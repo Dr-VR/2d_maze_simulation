@@ -20,8 +20,18 @@ public class followMouse : MonoBehaviour
         mousePosition.z = distance;
         transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Debug.Log("Coordinates : " + mousePosition);
-        Debug.Log("Coordinates : " + transform.position);
+   
+        //Testing different ways to print as it was not printing originally 
+        //Debug.Log("TEST PRINT");
+        //print("TEST PRINT");
+        //Debug.LogWarning("TEST PRINT");
+
+        //Prints out x, y, and z mouse coordinates to Unity console
+        Debug.LogError("values: " + transform.position);
+        //Prints out x and y coordinates to unity console
+        Debug.LogError("x val: " + transform.position.x + "y val: " + transform.position.y);
+
+
 
     }
 }
