@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class followMouse : MonoBehaviour
@@ -8,7 +9,7 @@ public class followMouse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,12 +29,22 @@ public class followMouse : MonoBehaviour
         //Prints out x, y, and z mouse coordinates to Unity console
         //Debug.LogWarning("values: " + transform.position);
         //Prints out x and y coordinates to unity console -- Error shouldnt print but my system was not working with Debug.Log
-        Debug.LogWarning("x val: " + transform.position.x + "y val: " + transform.position.y + "diff val: " + (transform.position.x - transform.position.y));
+        //Debug.LogWarning("x val: " + transform.position.x + "y val: " + transform.position.y + "diff val: (submit difference in values here)" );
 
-        // Correct syntax, but my system was not printing out correctly
-        //Debug.Log("X Value: ");
-        //Debug.Log(transform.position.x);
-        //Debug.Log(" Y Value: ");
-        //Debug.Log(transform.position.y);
+        // creating a linked list to store positions in to keep track of previous pos
+        // this will help with filtering out coordinate data (repetitive)
+        LinkedList<Vector3> position = new LinkedList<Vector3>();
+
+        //fill array with elements of position
+        //        position.AddLast(transform.position); // add new pos to end of list
+
+        var currentPos = transform.position; // curr set to the position
+        var lastPos = position.Last; // last set to the last element in list
+
+        //if (currentPos != lastPos) // checks to make sure the current position isnt the same as the last, if it doesnt then print data
+        {
+            Debug.Log("X Value: " + transform.position.x + " Y Value: " + transform.position.y);
+        }
+
     }
 }
