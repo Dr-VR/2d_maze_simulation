@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class leftEyeMovement : MonoBehaviour
 {
@@ -11,18 +12,39 @@ public class leftEyeMovement : MonoBehaviour
     //variable to access the transform component of the left eye
     public Transform leftEye;
 
+    
+    string deviation;
+    string rightEyeposition;
+    string upperthreshold;
+    string message;
 
+    //to create the text file
+    void CreateText(){
+        //File path
+        string path = Application.dataPath + "/Log.txt";
+
+        //check that the file doesn't exist
+        if(!File.Exists(path)){
+            File.WriteAllText(path, "Eye_Info /n/n");
+        }
+        //place info into the file
+        string info = "eye data; " + leftEye.position + "/n";
+        File.AppendAllText(path, info);
+
+
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         //turn off gravity for the left eye sphere
         rb.useGravity = false; 
+        //create the text
+        CreateText();
     }
 
-
-
-    // Update is called once per frame, use FixedUpdate for physics components like rigidbody
+    // Update is called once per frame 
+    //use FixedUpdate for physics components like rigidbody
     void FixedUpdate()
     {
         //x-axis
@@ -42,6 +64,17 @@ public class leftEyeMovement : MonoBehaviour
 
         
         Debug.Log(leftEye.position);
+
+        if(deviation>upperthreshold){
+            message = "The eyes show sign of exotropia";
+        }
+        if(deviation<lowerthreshold){
+            message = "The eyes show sign of esotropia";
+        }
+        else{
+            message = "The eyes do not show abnormal signs";
+        }
+
 
     }
 }
